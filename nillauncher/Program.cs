@@ -12,6 +12,7 @@ namespace nillauncher
 {
     class Program
     {
+        public static Engine JSEngine = new Engine(cfg => cfg.AllowClr());
         public static server Server;
         static void Main(string[] args)
         {
@@ -19,6 +20,11 @@ namespace nillauncher
             console_output.setup();
             Server = new server($"ws://0.0.0.0:{Runtime.config.ws.port}", Runtime.config.ws.endpoint);
             ProcessHelper.start_bds();
+            JSEngine.SetValue("log", new Action<string>(Console.WriteLine));
+            JSEngine.Execute(@"
+log('nmsl');
+listen(log);
+");
             new Thread(() =>
             {
                 while (true)

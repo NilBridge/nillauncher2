@@ -41,6 +41,13 @@ namespace nillauncher.src.server
                 }
             }
         }
+        static void addFunction(Jint.Native.JsValue jsValue)
+        {
+            actions.Add((ev) =>
+            {
+               Program.JSEngine.Invoke(jsValue,ev.Data);
+            });
+        }
         public static void setup()
         {
             int num = 0;
@@ -72,6 +79,7 @@ namespace nillauncher.src.server
                     Console.WriteLine(ev.Data);
                 }
             });
+            Program.JSEngine.SetValue("listen", new Action<Jint.Native.JsValue>(addFunction));
         }
     }
 }
