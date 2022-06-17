@@ -84,7 +84,7 @@ namespace nillauncher.src.server
             switch (pack.action)
             {
                 case "sendText":
-                    Runtime.bds.StandardInput.WriteLine("tellraw @a {\"rawtext\":[{\"text\":\"" + StringToUnicode(pack.@params.text) + "\"}]}", false);
+                    Runtime.bds.StandardInput.WriteLine("tellraw @a {\"rawtext\":[{\"text\":\"" + StringToUnicode(pack.@params.text) + "\"}]}");
                     break;
                 case "runcmdrequest":
                     console_output.runcmd(pack.@params.cmd, pack.@params.id,ws_id);

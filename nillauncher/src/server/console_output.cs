@@ -46,14 +46,13 @@ namespace nillauncher.src.server
             int num = 0;
             actions.Add((ev) =>
             {
-                Console.WriteLine(is_running);
                 if (is_running)
                 {
                     num += 1;
                     result += ev.Data;
                     if (num == lines)
                     {
-                        Program.Server.sendCmdResult(ws_id, JsonConvert.SerializeObject(new
+                        Program.Server.send(ws_id, JsonConvert.SerializeObject(new
                         {
                             type = "runcmdfeedback",
                             @params = new packs.@params

@@ -62,7 +62,7 @@ namespace nillauncher.src.ws
             ws.Start();
             ws.AddWebSocketService<serve>(endpoint);
         }
-        public void sendCmdResult(string id,string pack)
+        public void send(string id,string pack)
         {
             clients[id].Send(pack);
         }
