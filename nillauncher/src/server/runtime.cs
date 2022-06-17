@@ -93,10 +93,15 @@ namespace nillauncher.src.server
         public int restart_time { get; set; }
         public string version { get; set; }
     }
+    public class ws_key {
+        public  string k { get; set; }
+        public string iv { get; set; }
+    }
     public class Runtime
     {
         public static Process bds;
         public static Config config;
+        public static ws_key key = new ws_key();
         public static bool exit_by_stop = false;
         public static void loadConfig()
         {
@@ -115,6 +120,8 @@ namespace nillauncher.src.server
             }
             string configContent = File.ReadAllText("./nillauncher/config.json");
             config = JsonConvert.DeserializeObject<Config>(configContent);
+            key.k = MD5.MD5Encrypt(config.ws.encrypt.password).Substring(0, 16);
+            key.iv = MD5.MD5Encrypt(config.ws.encrypt.password).Substring(16);
         }
     }
     public class ProcessHelper
@@ -146,6 +153,7 @@ namespace nillauncher.src.server
         {
             Runtime.bds = CreateProcess(Runtime.config.file_path);
             Runtime.exit_by_stop = false;
+            start_time += 1;
             var b = new Thread(() =>
             {
                 Runtime.bds.Start();
@@ -158,7 +166,7 @@ namespace nillauncher.src.server
         }
         private static void bds_exit(object sender, EventArgs e)
         {
-
+            start_time = 0;
         }
     }
 }

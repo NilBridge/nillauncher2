@@ -10,6 +10,7 @@ namespace nillauncher.src.packs
 
     public class packBase
     {
+        public string action { get; set; }
         public string type { get; set; }
         public @params @params { get; set; }
     }
@@ -40,5 +41,13 @@ namespace nillauncher.src.packs
         /// 
         /// </summary>
         public string msg { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string mode { get; set; }
+       /// <summary>
+       /// 
+       /// </summary>
+        public string raw { get; set; }
     }
 }

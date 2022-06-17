@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XBridge.Utils
+namespace nillauncher
 {
     class MD5
     {
